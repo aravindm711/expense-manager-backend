@@ -58,10 +58,12 @@ class ExpenseViewSet(ModelViewSet):
     def create(self, request, *args, **kwargs):
         # data = copy.deepcopy(request.data)
         # data["created_by"] = get_user_model().objects.get(username=request.user).pk
+        print(request.data)
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
+        print(serializer.data)
 
         return Response(
             {**serializer.data}, status=status.HTTP_201_CREATED, headers=headers
@@ -74,10 +76,12 @@ class ExpenseViewSet(ModelViewSet):
         instance = self.get_object()
         data = copy.deepcopy(request.data)
         data["created_by"] = get_user_model().objects.get(username=request.user).pk
+        print(data)
         serializer = self.get_serializer(instance, data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         headers = self.get_success_headers(serializer.data)
+        print(serializer.data)
 
         return Response(
             {**serializer.data}, status=status.HTTP_202_ACCEPTED, headers=headers
