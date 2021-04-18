@@ -28,17 +28,40 @@ class CreateUserSerializer(serializers.ModelSerializer):
 
 
 class ExpenseSerializer(serializers.ModelSerializer):
+    amount = serializers.IntegerField()
+    detail = serializers.CharField()
+    payment_type = serializers.CharField()
+    tags = serializers.CharField()
+
     class Meta:
         model = Expense
-        fields = '__all__'
+        fields = ("expense_id", "date", "amount", "detail", "payment_type", "tags")
 
 
 class LentOrOwedExpenseSerializer(serializers.ModelSerializer):
+    amount = serializers.IntegerField()
+    detail = serializers.CharField()
+    payment_type = serializers.CharField()
+    tags = serializers.CharField()
+
     class Meta:
         model = LentOrOwedExpense
-        fields = '__all__'
+        fields = (
+            "expense_id",
+            "to",
+            "created_by",
+            "date",
+            "amount",
+            "detail",
+            "payment_type",
+            "tags",
+        )
+
 
 class ExpenseNotificationSerializer(serializers.ModelSerializer):
+    detail = serializers.CharField()
+    notified = serializers.CharField()
+
     class Meta:
         model = ExpenseNotification
         fields = ("notif_id", "detail", "notified", "created_on")

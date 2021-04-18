@@ -56,10 +56,10 @@ class ExpenseViewSet(ModelViewSet):
         return Expense.objects.filter(created_by=self.request.user).order_by("-date")
 
     def create(self, request, *args, **kwargs):
-        # data = copy.deepcopy(request.data)
-        # data["created_by"] = get_user_model().objects.get(username=request.user).pk
-        print(request.data)
-        serializer = self.get_serializer(data=request.data)
+        data = copy.deepcopy(request.data)
+        data["created_by"] = get_user_model().objects.get(username=request.user).pk
+        print(data)
+        serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
