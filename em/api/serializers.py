@@ -30,25 +30,15 @@ class CreateUserSerializer(serializers.ModelSerializer):
 class ExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Expense
-        fields = ["expense_id", "date", "amount", "detail", "payment_type", "tags"]
+        fields = '__all__'
 
 
 class LentOrOwedExpenseSerializer(serializers.ModelSerializer):
     class Meta:
         model = LentOrOwedExpense
-        fields = [
-            "expense_id",
-            "to",
-            "created_by",
-            "date",
-            "amount",
-            "detail",
-            "payment_type",
-            "tags",
-        ]
-
+        fields = '__all__'
 
 class ExpenseNotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExpenseNotification
-        fields = ["notif_id", "detail", "notified", "created_on"]
+        fields = ("notif_id", "detail", "notified", "created_on")
